@@ -1,0 +1,48 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DeepPartial } from 'typeorm';
+import { Order } from './entities/order.entity';
+import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdateOrderDto } from './dto/update-order.dto';
+
+@Injectable()
+export class OrdersService {
+  constructor(
+    @InjectRepository(Order)
+    private readonly orderRepository: Repository<Order>,
+  ) {}
+
+  async create(createOrderDto: CreateOrderDto): Promise<Order> {
+    const order = this.orderRepository.create(
+      createOrderDto as DeepPartial<Order>,
+    );
+    return await this.orderRepository.save(order);
+  }
+
+  async findAll(): Promise<Order[]> {
+    return await this.orderRepository.find({ relations: ['usuario'] });
+  }
+
+  async findOne(id: number): Promise<Order> {
+    const order = await this.orderRepository.findOne({
+      where: { id },
+      relations: ['usuario'],
+    });
+    if (!order) {
+      throw new NotFoundException(`Orden con id ${id} no encontrada`);
+    }
+    return order;
+  }
+
+  async update(id: number, updateOrderDto: UpdateOrderDto): Promise<Order> {
+    const order = await this.findOne(id);
+    Object.assign(order, updateOrderDto);
+    return await this.orderRepository.save(order);
+  }
+
+  async remove(id: number): Promise<{ message: string }> {
+    const order = await this.findOne(id);
+    await this.orderRepository.remove(order);
+    return { message: `Orden con id ${id} eliminada` };
+  }
+}
