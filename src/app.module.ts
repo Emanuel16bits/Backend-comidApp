@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { BackofficeModule } from './backoffice/backoffice.module';
 import { UsersModule } from './users/users.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
 import { ProductsModule } from './products/products.module';
@@ -24,6 +25,7 @@ import { AppService } from './app.service';
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     AuthModule,
+    BackofficeModule,
     UsersModule,
     RestaurantsModule,
     ProductsModule,

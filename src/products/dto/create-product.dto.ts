@@ -5,8 +5,8 @@ export const createProductSchema = yup.object().shape({
   descripcion: yup.string().required('La descripción es obligatoria'),
   stock: yup.number().required('El stock es obligatorio'),
   imagen: yup.string().optional(),
-  restaurantId: yup.number().required('El ID del restaurante es obligatorio'),
-  userId: yup.number().required('El ID del usuario es obligatorio'),
+  restaurantId: yup.number().required('El id del restaurante es obligatorio'),
+  userId: yup.number().required('El id del usuario es obligatorio'),
 });
 
 export type CreateProductDto = yup.InferType<typeof createProductSchema>;

@@ -7,6 +7,7 @@ import { Favorite } from '../../favorites/entities/favorite.entity';
 import { Cart } from '../../cart/entities/cart.entity';
 
 export enum UserRole {
+  ADMIN = 'admin',
   CLIENTE = 'cliente',
   VENDEDOR = 'vendedor',
   REPARTIDOR = 'repartidor',

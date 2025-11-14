@@ -23,7 +23,6 @@ export class ProductsService {
   ) {}
 
   async create(createProductDto: CreateProductDto) {
-    // Verificar que el usuario existe
     const user = await this.usersRepository.findOne({
       where: { id: createProductDto.userId },
     });
@@ -34,7 +33,6 @@ export class ProductsService {
       );
     }
 
-    // Verificar que el restaurante existe y pertenece al usuario
     const restaurant = await this.restaurantsRepository.findOne({
       where: {
         id: createProductDto.restaurantId,
@@ -85,7 +83,6 @@ export class ProductsService {
       throw new NotFoundException(`Producto #${id} no encontrado`);
     }
 
-    // Solo actualiza las propiedades que vienen en el DTO
     Object.assign(product, updateProductDto);
 
     return this.productsRepository.save(product);

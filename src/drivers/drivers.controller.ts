@@ -1,4 +1,3 @@
-// Update the imports at the top
 import {
   Controller,
   Get,
@@ -16,7 +15,6 @@ import { CreateDriverDto } from './dto/create-driver.dto';
 @Controller('drivers')
 export class DriversController {
   constructor(private readonly driversService: DriversService) {}
-
 
   @Patch('user/:userId/vehiculo')
   async actualizarVehiculoPorUsuario(
@@ -41,7 +39,7 @@ export class DriversController {
     }
   }
 
-    @Get('user/:userId/vehicles')
+  @Get('user/:userId/vehicles')
   async getDriverVehicles(@Param('userId') userId: string) {
     try {
       console.log(`Buscando vehículos para el usuario ID: ${userId}`);
@@ -54,7 +52,6 @@ export class DriversController {
         );
       }
 
-      // Devolver solo la información del vehículo
       return {
         id: driver.id,
         tipoVehiculo: driver.tipoVehiculo,
@@ -83,10 +80,9 @@ export class DriversController {
   @Post()
   async crear(@Body() createDriverDto: CreateDriverDto): Promise<Driver> {
     try {
-      // Ensure default values are set
       const driverData = {
         ...createDriverDto,
-        disponible: createDriverDto.disponible ?? true, // Default to true if not provided
+        disponible: createDriverDto.disponible ?? true,
         calificacion: createDriverDto.calificacion ?? 0,
         gananciasTotales: createDriverDto.gananciasTotales ?? 0,
       };
@@ -122,7 +118,4 @@ export class DriversController {
   ): Promise<Driver> {
     return this.driversService.actualizarCalificacion(id, calificacion);
   }
-
-
-
 }

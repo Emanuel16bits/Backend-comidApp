@@ -1,10 +1,5 @@
 import * as yup from 'yup';
 
-const restauranteSchema = yup.object({
-  nombre: yup.string().required('El nombre es obligatorio'),
-  direccion: yup.string().required('La dirección es obligatoria'),
-  categoria: yup.string().required('La categoría es obligatoria'),
-});
 export const createUserSchema = yup.object().shape({
   nombre: yup.string().required('El nombre es obligatorio').min(2),
   email: yup
@@ -28,6 +23,12 @@ export const createUserSchema = yup.object().shape({
       ),
     otherwise: () => yup.mixed().notRequired(),
   }),
+});
+
+const restauranteSchema = yup.object({
+  nombre: yup.string().required('El nombre es obligatorio'),
+  direccion: yup.string().required('La dirección es obligatoria'),
+  categoria: yup.string().required('La categoría es obligatoria'),
 });
 
 export type CreateUserDto = yup.InferType<typeof createUserSchema>;

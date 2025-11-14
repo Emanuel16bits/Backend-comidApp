@@ -51,7 +51,7 @@ export class CartController {
     if (isNaN(cartId)) {
       throw new BadRequestException({
         statusCode: 400,
-        message: 'ID de carrito no válido',
+        message: 'id de carrito no válido',
       });
     }
     return this.cartService.findOne(cartId);
@@ -63,7 +63,7 @@ export class CartController {
     if (isNaN(cartId)) {
       throw new BadRequestException({
         statusCode: 400,
-        message: 'ID de carrito no válido',
+        message: 'id de carrito no válido',
       });
     }
 
@@ -93,7 +93,7 @@ export class CartController {
     if (isNaN(cartId)) {
       throw new BadRequestException({
         statusCode: 400,
-        message: 'ID de carrito no válido',
+        message: 'id de carrito no válido',
       });
     }
 
